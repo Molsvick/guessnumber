@@ -6,7 +6,7 @@ from random import randint
 class Adivinar:
     def juego():
         global randint,text,letra
-        secreto = randint(1,2)
+        secreto = randint(1,100)
         text = "En que numero estoy pensando?:"
         for letra in str(text):
             print(letra, end="")
@@ -82,7 +82,7 @@ class SerAdivinado:
         print(int(numMaquina))
 
         simbolo = input()
-        while simbolo != '=' :
+        while simbolo != '=' and intento2 != 7:
             if simbolo == '+':
                 numMin = numMaquina
                 numMaquina = numMaquina+round((numMax-numMin)/2)
@@ -94,6 +94,9 @@ class SerAdivinado:
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
+                if numMaquina == 99 and simbolo == '+':
+                    numMaquina = 100
+                    simbolo = '='
 
             if simbolo == '-':
                 numMax = numMaquina
@@ -106,6 +109,9 @@ class SerAdivinado:
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
+                if numMaquina == 2 and simbolo == '-':
+                    numMaquina = 1
+                    simbolo = '='
 
         if simbolo == '=':
             text = "Gane, Tu numero era:"
@@ -115,8 +121,8 @@ class SerAdivinado:
                 sys.stdout.flush()
             print(int(numMaquina))
             return Pregunta.preguntaAdiv()
-        if intento2 == 5:
-            text = "Perdi amigo, la proxima sera"
+        if intento2 == 7:
+            text = "Querias que perdiera, pero claramente no hay mas posibilidades\n"
             for letra in str(text):
                 print(letra, end="")
                 time.sleep(0.03)
@@ -146,7 +152,6 @@ class Pregunta:
             exit()
 
     def preguntaJuego():
-        global text,letra
         text = "Deseas jugar nuevamente contra mi?(si/no):\n"
         for letra in str(text):
             print(letra, end="")
@@ -155,10 +160,11 @@ class Pregunta:
         respu = input()
         if respu == 'si':
             Adivinar.juego()
+        if respu == 'no':
+            Pregunta.repreguntaSerAdiv()
         return
 
     def preguntaAdiv():
-        global text,letra
         text = "Deseas que adivine nuevamente?(si/no):\n"
         for letra in str(text):
             print(letra, end="")
@@ -167,8 +173,43 @@ class Pregunta:
         respu = input()
         if respu == 'si':
             SerAdivinado.adivinado()
+        if respu == 'no':
+            Pregunta.repreguntaAdiv()
         return
 
+    def repreguntaAdiv():
+        text = "Te entiendo, si ahora quieres adivinar solo dime 'si' de otro modo solo aprieta cualquier tecla para salir\n"
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.03)
+            sys.stdout.flush()
+        respu = input()
+        if respu == 'si':
+            SerAdivinado.adivinado()
+        else:
+            text = "Nos vimos.....\n"
+            for letra in str(text):
+                print(letra, end="")
+                time.sleep(0.05)
+                sys.stdout.flush()
+            exit()
+
+    def repreguntaSerAdiv():
+        text = "Oka, si quieres que adivine tu numero dime 'si' , y en caso de que quieras irte aprieta cualquier tecla\n"
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.03)
+            sys.stdout.flush()
+        respu = input()
+        if respu == 'si':
+            Adivinar.juego()
+        else:
+            text = "Nos vimos.....\n"
+            for letra in str(text):
+                print(letra, end="")
+                time.sleep(0.05)
+                sys.stdout.flush()
+            exit()
 
 text = "Bienvenido al Juego de adivinar el Numero\n"
 for letra in str(text):
