@@ -10,7 +10,7 @@ class Adivinar:
         text = "En que numero estoy pensando?:"
         for letra in str(text):
             print(letra, end="")
-            time.sleep(0.05)
+            time.sleep(0.03)
             sys.stdout.flush()
         numero = int(input())
         intento = 1
@@ -19,7 +19,7 @@ class Adivinar:
                 text = "Mi numero es menor, intentelo denuevo:"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 numero = int(input())
                 intento+=1
@@ -27,7 +27,7 @@ class Adivinar:
                 text = "Mi numero es mayor, intentelo denuevo:"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 numero = int(input())
                 intento+=1
@@ -36,28 +36,28 @@ class Adivinar:
                 text = "Epa...casi que perdes, pero le has acertado\n"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 return Pregunta.preguntaJuego()
             if intento == 1:
                 text = "Crack, adivinaste en 1 solo intento, mis felicitaciones\n"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 return Pregunta.preguntaJuego()
             else:
                 text = "Exelente, le acertaste a mi numero\n"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 return Pregunta.preguntaJuego()
         if intento == 5:
             text = "Perdiste amigo, mejor para la proxima\n"
             for letra in str(text):
                 print(letra, end="")
-                time.sleep(0.05)
+                time.sleep(0.03)
                 sys.stdout.flush()
             return Pregunta.preguntaJuego()
 
@@ -82,38 +82,36 @@ class SerAdivinado:
         print(int(numMaquina))
 
         simbolo = input()
-        if simbolo == '+':
-            numMin = numMaquina
-        if simbolo == '-':
-            numMax = numMaquina
-        while simbolo != '=' and intento2 != 5:
+        while simbolo != '=' :
             if simbolo == '+':
+                numMin = numMaquina
                 numMaquina = numMaquina+round((numMax-numMin)/2)
                 text = "Asi que es mayor? Puede ser:"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
-                numMin = numMaquina
+
             if simbolo == '-':
+                numMax = numMaquina
                 numMaquina = numMaquina-round((numMax-numMin)/2)
                 text = "Conque era menor? Podra ser:"
                 for letra in str(text):
                     print(letra, end="")
-                    time.sleep(0.05)
+                    time.sleep(0.03)
                     sys.stdout.flush()
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
-                numMax = numMaquina
+
         if simbolo == '=':
             text = "Gane, Tu numero era:"
             for letra in str(text):
                 print(letra, end="")
-                time.sleep(0.05)
+                time.sleep(0.03)
                 sys.stdout.flush()
             print(int(numMaquina))
             return Pregunta.preguntaAdiv()
@@ -121,7 +119,7 @@ class SerAdivinado:
             text = "Perdi amigo, la proxima sera"
             for letra in str(text):
                 print(letra, end="")
-                time.sleep(0.05)
+                time.sleep(0.03)
                 sys.stdout.flush()
             return Pregunta.preguntaAdiv()
 
@@ -131,17 +129,19 @@ class Pregunta:
         text = "Deseas jugar contra mi o quieres que adivine? (1: Adivino yo 2: Adivina Maquina):\n"
         for letra in str(text):
             print(letra, end="")
-            time.sleep(0.05)
+            time.sleep(0.03)
             sys.stdout.flush()
         text = "Si quieres salir aprieta cualquier tecla\n"
         for letra in str(text):
             print(letra, end="")
-            time.sleep(0.05)
+            time.sleep(0.03)
             sys.stdout.flush()
         resp = int(input())
 
         if resp == 1:
             Adivinar.juego()
+        if resp == 2:
+            SerAdivinado.adivinado()
         else:
             exit()
 
@@ -150,7 +150,7 @@ class Pregunta:
         text = "Deseas jugar nuevamente contra mi?(si/no):\n"
         for letra in str(text):
             print(letra, end="")
-            time.sleep(0.05)
+            time.sleep(0.03)
             sys.stdout.flush()
         respu = input()
         if respu == 'si':
@@ -162,7 +162,7 @@ class Pregunta:
         text = "Deseas que adivine nuevamente?(si/no):\n"
         for letra in str(text):
             print(letra, end="")
-            time.sleep(0.05)
+            time.sleep(0.03)
             sys.stdout.flush()
         respu = input()
         if respu == 'si':
@@ -173,13 +173,13 @@ class Pregunta:
 text = "Bienvenido al Juego de adivinar el Numero\n"
 for letra in str(text):
     print(letra, end="")
-    time.sleep(0.05)
+    time.sleep(0.03)
     sys.stdout.flush()
 
 text = "Vamos a divertirnos eligiendo un numero del 1 al 100\n"
 for letra in str(text):
     print(letra, end="")
-    time.sleep(0.05)
+    time.sleep(0.03)
     sys.stdout.flush()
 
 Pregunta.pregJugar()
