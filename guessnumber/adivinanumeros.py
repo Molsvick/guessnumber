@@ -7,58 +7,30 @@ class Adivinar:
     def juego():
         global randint,text,letra
         secreto = randint(1,100)
-        text = "En que numero estoy pensando?:"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+        Dialogo.agilDialogo(text = "En que numero estoy pensando?:")
         numero = int(input())
         intento = 1
         while numero != secreto and intento != 5:
             if numero > secreto:
-                text = "Mi numero es menor, intentelo denuevo:"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Mi numero es menor, intentelo denuevo:")
                 numero = int(input())
                 intento+=1
             if numero < secreto:
-                text = "Mi numero es mayor, intentelo denuevo:"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Mi numero es mayor, intentelo denuevo:")
                 numero = int(input())
                 intento+=1
         if numero == secreto:
             if intento == 5:
-                text = "Epa...casi que perdes, pero le has acertado\n"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Epa...casi que perdes, pero le has acertado\n")
                 return Pregunta.preguntaJuego()
             if intento == 1:
-                text = "Crack, adivinaste en 1 solo intento, mis felicitaciones\n"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Crack, adivinaste en 1 solo intento, mis felicitaciones\n")
                 return Pregunta.preguntaJuego()
             else:
-                text = "Exelente, le acertaste a mi numero\n"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Exelente, le acertaste a mi numero\n")
                 return Pregunta.preguntaJuego()
         if intento == 5:
-            text = "Perdiste amigo, mejor para la proxima\n"
-            for letra in str(text):
-                print(letra, end="")
-                time.sleep(0.03)
-                sys.stdout.flush()
+            Dialogo.agilDialogo(text = "Perdiste amigo, mejor para la proxima\n")
             return Pregunta.preguntaJuego()
 
 
@@ -68,17 +40,8 @@ class SerAdivinado:
         numMax = 100
         intento2 = 1
         numMaquina = round(numMax+numMin)/2
-        text = "Piensa el numero fuertemente y no me lo digas (Coloca '+' si tu numero es mayor, '-' si es menor, '=' si es igual)\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
-
-        text = "Es tu numero:"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+        Dialogo.agilDialogo(text = "Piensa el numero fuertemente y no me lo digas (Coloca '+' si tu numero es mayor, '-' si es menor, '=' si es igual)\n")
+        Dialogo.agilDialogo(text = "Es tu numero:")
         print(int(numMaquina))
 
         simbolo = input()
@@ -86,11 +49,7 @@ class SerAdivinado:
             if simbolo == '+':
                 numMin = numMaquina
                 numMaquina = numMaquina+round((numMax-numMin)/2)
-                text = "Asi que es mayor? Puede ser:"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Asi que es mayor? Puede ser:")
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
@@ -101,11 +60,7 @@ class SerAdivinado:
             if simbolo == '-':
                 numMax = numMaquina
                 numMaquina = numMaquina-round((numMax-numMin)/2)
-                text = "Conque era menor? Podra ser:"
-                for letra in str(text):
-                    print(letra, end="")
-                    time.sleep(0.03)
-                    sys.stdout.flush()
+                Dialogo.agilDialogo(text = "Conque era menor? Podra ser:")
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
@@ -114,34 +69,18 @@ class SerAdivinado:
                     simbolo = '='
 
         if simbolo == '=':
-            text = "Gane, Tu numero era:"
-            for letra in str(text):
-                print(letra, end="")
-                time.sleep(0.03)
-                sys.stdout.flush()
+            Dialogo.agilDialogo(text = "Gane, Tu numero era:")
             print(int(numMaquina))
             return Pregunta.preguntaAdiv()
         if intento2 == 7:
-            text = "Querias que perdiera, pero claramente no hay mas posibilidades\n"
-            for letra in str(text):
-                print(letra, end="")
-                time.sleep(0.03)
-                sys.stdout.flush()
+            Dialogo.agilDialogo(text = "Querias que perdiera, pero claramente no hay mas posibilidades\n")
             return Pregunta.preguntaAdiv()
 
 
 class Pregunta:
     def pregJugar():
-        text = "Deseas jugar contra mi o quieres que adivine? (1: Adivino yo 2: Adivina Maquina):\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
-        text = "Si quieres salir aprieta cualquier tecla\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+        Dialogo.agilDialogo(text = "Deseas jugar contra mi o quieres que adivine? (1: Adivino yo 2: Adivina Maquina):\n")
+        Dialogo.agilDialogo(text = "Si quieres salir aprieta cualquier tecla\n")
         resp = int(input())
 
         if resp == 1:
@@ -152,11 +91,7 @@ class Pregunta:
             exit()
 
     def preguntaJuego():
-        text = "Deseas jugar nuevamente contra mi?(si/no):\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+        Dialogo.agilDialogo(text = "Deseas jugar nuevamente contra mi?(si/no):\n")
         respu = input()
         if respu == 'si':
             Adivinar.juego()
@@ -165,11 +100,7 @@ class Pregunta:
         return
 
     def preguntaAdiv():
-        text = "Deseas que adivine nuevamente?(si/no):\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+        Dialogo.agilDialogo(text = "Deseas que adivine nuevamente?(si/no):\n")
         respu = input()
         if respu == 'si':
             SerAdivinado.adivinado()
@@ -177,54 +108,36 @@ class Pregunta:
             Pregunta.repreguntaAdiv()
         return
 
-    def repreguntaAdiv():
-        text = "Te entiendo, si ahora quieres adivinar solo dime 'si' de otro modo solo aprieta cualquier tecla para salir\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+    def repreguntaSerAdiv():
+        Dialogo.agilDialogo(text = "Te entiendo, si ahora quieres adivinar solo dime 'si' de otro modo solo aprieta cualquier tecla para salir\n")
         respu = input()
         if respu == 'si':
             SerAdivinado.adivinado()
         else:
-            text = "Nos vimos.....\n"
-            for letra in str(text):
-                print(letra, end="")
-                time.sleep(0.05)
-                sys.stdout.flush()
+            Dialogo.agilDialogo(text = "Nos vimos.....\n")
             exit()
 
-    def repreguntaSerAdiv():
-        text = "Oka, si quieres que adivine tu numero dime 'si' , y en caso de que quieras irte aprieta cualquier tecla\n"
-        for letra in str(text):
-            print(letra, end="")
-            time.sleep(0.03)
-            sys.stdout.flush()
+    def repreguntaAdiv():
+        Dialogo.agilDialogo(text = "Oka, si quieres que adivine tu numero dime 'si' , y en caso de que quieras irte aprieta cualquier tecla\n")
         respu = input()
         if respu == 'si':
             Adivinar.juego()
         else:
-            text = "Nos vimos.....\n"
-            for letra in str(text):
-                print(letra, end="")
-                time.sleep(0.05)
-                sys.stdout.flush()
+            Dialogo.agilDialogo(text = "Nos vimos.....\n")
             exit()
 
-text = "Bienvenido al Juego de adivinar el Numero\n"
-for letra in str(text):
-    print(letra, end="")
-    time.sleep(0.03)
-    sys.stdout.flush()
+class Dialogo:
+    def agilDialogo(text):
+        text = text
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.03)
+            sys.stdout.flush()
 
-text = "Vamos a divertirnos eligiendo un numero del 1 al 100\n"
-for letra in str(text):
-    print(letra, end="")
-    time.sleep(0.03)
-    sys.stdout.flush()
+Dialogo.agilDialogo(text = "Bienvenido al Juego de adivinar el Numero\n")
+
+Dialogo.agilDialogo(text = "Vamos a divertirnos eligiendo un numero del 1 al 100\n")
 
 Pregunta.pregJugar()
-
-
 
 
