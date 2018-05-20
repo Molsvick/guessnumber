@@ -62,6 +62,70 @@ class Adivinar:
             return Pregunta.preguntaJuego()
 
 
+class SerAdivinado:
+    def adivinado():
+        numMin = 0
+        numMax = 100
+        intento2 = 1
+        numMaquina = round(numMax+numMin)/2
+        text = "Piensa el numero fuertemente y no me lo digas (Coloca '+' si tu numero es mayor, '-' si es menor, '=' si es igual)\n"
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.03)
+            sys.stdout.flush()
+
+        text = "Es tu numero:"
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.03)
+            sys.stdout.flush()
+        print(int(numMaquina))
+
+        simbolo = input()
+        if simbolo == '+':
+            numMin = numMaquina
+        if simbolo == '-':
+            numMax = numMaquina
+        while simbolo != '=' and intento2 != 5:
+            if simbolo == '+':
+                numMaquina = numMaquina+round((numMax-numMin)/2)
+                text = "Asi que es mayor? Puede ser:"
+                for letra in str(text):
+                    print(letra, end="")
+                    time.sleep(0.05)
+                    sys.stdout.flush()
+                print(int(numMaquina))
+                simbolo = input()
+                intento2 = intento2+1
+                numMin = numMaquina
+            if simbolo == '-':
+                numMaquina = numMaquina-round((numMax-numMin)/2)
+                text = "Conque era menor? Podra ser:"
+                for letra in str(text):
+                    print(letra, end="")
+                    time.sleep(0.05)
+                    sys.stdout.flush()
+                print(int(numMaquina))
+                simbolo = input()
+                intento2 = intento2+1
+                numMax = numMaquina
+        if simbolo == '=':
+            text = "Gane, Tu numero era:"
+            for letra in str(text):
+                print(letra, end="")
+                time.sleep(0.05)
+                sys.stdout.flush()
+            print(int(numMaquina))
+            return Pregunta.preguntaAdiv()
+        if intento2 == 5:
+            text = "Perdi amigo, la proxima sera"
+            for letra in str(text):
+                print(letra, end="")
+                time.sleep(0.05)
+                sys.stdout.flush()
+            return Pregunta.preguntaAdiv()
+
+
 class Pregunta:
     def pregJugar():
         text = "Deseas jugar contra mi o quieres que adivine? (1: Adivino yo 2: Adivina Maquina):\n"
@@ -92,6 +156,19 @@ class Pregunta:
         if respu == 'si':
             Adivinar.juego()
         return
+
+    def preguntaAdiv():
+        global text,letra
+        text = "Deseas que adivine nuevamente?(si/no):\n"
+        for letra in str(text):
+            print(letra, end="")
+            time.sleep(0.05)
+            sys.stdout.flush()
+        respu = input()
+        if respu == 'si':
+            SerAdivinado.adivinado()
+        return
+
 
 text = "Bienvenido al Juego de adivinar el Numero\n"
 for letra in str(text):
