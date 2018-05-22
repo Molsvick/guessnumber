@@ -5,7 +5,6 @@ from random import randint
 
 class Adivinar:
     def juego():
-        global randint,text,letra
         secreto = randint(1,100)
         Dialogo.agilDialogo(text = "En que numero estoy pensando?:")
         numero = int(input())
@@ -53,6 +52,7 @@ class SerAdivinado:
                 print(int(numMaquina))
                 simbolo = input()
                 intento2 = intento2+1
+                #Caso particular
                 if numMaquina == 99 and simbolo == '+':
                     numMaquina = 100
                     simbolo = '='
